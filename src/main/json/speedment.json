@@ -1,0 +1,989 @@
+{
+  "config": {
+    "expanded": true,
+    "companyName": "model",
+    "name": "db",
+    "packageLocation": "src/main/java/",
+    "packageName": "com.model",
+    "dbmses": [
+      {
+        "expanded": true,
+        "port": 3306,
+        "schemas": [
+          {
+            "tables": [
+              {
+                "foreignKeys": [
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "location_id",
+                        "foreignColumnName": "id",
+                        "foreignTableName": "location",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_house_location1"
+                  },
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "tour_onlineID",
+                        "foreignColumnName": "onlineID",
+                        "foreignTableName": "tour",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_house_tour1"
+                  },
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "zillow_id",
+                        "foreignColumnName": "id",
+                        "foreignTableName": "zillow",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_house_zillow1"
+                  }
+                ],
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_house_location1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "location_id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_house_tour1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "tour_onlineID",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_house_zillow1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "zillow_id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "autoIncrement": true,
+                    "name": "id",
+                    "ordinalPosition": 1,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "localID",
+                    "ordinalPosition": 2,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "placerID",
+                    "ordinalPosition": 3,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "visitId",
+                    "ordinalPosition": 4,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "startDate",
+                    "ordinalPosition": 5,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "endDate",
+                    "ordinalPosition": 6,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "action",
+                    "ordinalPosition": 7,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "CustomAction",
+                    "ordinalPosition": 8,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "city",
+                    "ordinalPosition": 9,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "liked",
+                    "ordinalPosition": 10,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "note",
+                    "ordinalPosition": 11,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "customEventTitle",
+                    "ordinalPosition": 12,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "GenericImageURL",
+                    "ordinalPosition": 13,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "VenueID",
+                    "ordinalPosition": 14,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "isTransitEvent",
+                    "ordinalPosition": 15,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "pinImageName",
+                    "ordinalPosition": 16,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "updatedAt",
+                    "ordinalPosition": 17,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "numberOfPhotos",
+                    "ordinalPosition": 18,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "tour_onlineID",
+                    "ordinalPosition": 19,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "location_id",
+                    "ordinalPosition": 20,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "zillow_id",
+                    "ordinalPosition": 21
+                  }
+                ],
+                "name": "house",
+                "enabled": true
+              },
+              {
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "x",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "y",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "autoIncrement": true,
+                    "name": "id",
+                    "ordinalPosition": 3
+                  }
+                ],
+                "name": "location"
+              },
+              {
+                "foreignKeys": [
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "house_id",
+                        "foreignColumnName": "id",
+                        "foreignTableName": "house",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_photo_house1"
+                  }
+                ],
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_photo_house1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "house_id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "autoIncrement": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "photoID",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "assetID",
+                    "ordinalPosition": 3
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "date",
+                    "ordinalPosition": 4
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "location",
+                    "ordinalPosition": 5
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "dimensions",
+                    "ordinalPosition": 6
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "house_id",
+                    "ordinalPosition": 7
+                  }
+                ],
+                "name": "photo"
+              },
+              {
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "onlineID",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "onlineID",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "onlineID",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "description",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "title",
+                    "ordinalPosition": 3
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "startDate",
+                    "ordinalPosition": 4
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "endDate",
+                    "ordinalPosition": 5
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "customTitle",
+                    "ordinalPosition": 6
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "dateAsString",
+                    "ordinalPosition": 7
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "updatedAt",
+                    "ordinalPosition": 8
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "syncedAt",
+                    "ordinalPosition": 9
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "shareCoverImageURL",
+                    "ordinalPosition": 10
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "customCoverAssetID",
+                    "ordinalPosition": 11
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "archived",
+                    "ordinalPosition": 12
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "deleted",
+                    "ordinalPosition": 13
+                  }
+                ],
+                "name": "tour"
+              },
+              {
+                "foreignKeys": [
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "tour_onlineID",
+                        "foreignColumnName": "onlineID",
+                        "foreignTableName": "tour",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_tour_has_user_tour1"
+                  },
+                  {
+                    "expanded": false,
+                    "foreignKeyColumns": [
+                      {
+                        "expanded": true,
+                        "name": "user_id",
+                        "foreignColumnName": "id",
+                        "foreignTableName": "user",
+                        "ordinalPosition": 1
+                      }
+                    ],
+                    "name": "fk_tour_has_user_user1"
+                  }
+                ],
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "tour_onlineID",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "expanded": true,
+                    "name": "user_id",
+                    "ordinalPosition": 2
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "tour_onlineID",
+                        "ordinalPosition": 1
+                      },
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "user_id",
+                        "ordinalPosition": 2
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_tour_has_user_tour1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "tour_onlineID",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  },
+                  {
+                    "expanded": false,
+                    "unique": false,
+                    "name": "fk_tour_has_user_user1_idx",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "user_id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "tour_onlineID",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "user_id",
+                    "ordinalPosition": 2
+                  }
+                ],
+                "name": "tour_has_user"
+              },
+              {
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "autoIncrement": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "accessToken",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "email",
+                    "ordinalPosition": 3
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "userName",
+                    "ordinalPosition": 4
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "profileImageURL",
+                    "ordinalPosition": 5
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "backgroundImageName",
+                    "ordinalPosition": 6
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "logoImageURL",
+                    "ordinalPosition": 7
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "create_time",
+                    "ordinalPosition": 8
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "phoneNumber",
+                    "ordinalPosition": 9
+                  }
+                ],
+                "name": "user"
+              },
+              {
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "venueID",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "venueID",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "name",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "location",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "address",
+                    "ordinalPosition": 3
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "city",
+                    "ordinalPosition": 4
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "name": "venueID",
+                    "ordinalPosition": 5
+                  }
+                ],
+                "name": "venue"
+              },
+              {
+                "expanded": true,
+                "primaryKeyColumns": [
+                  {
+                    "expanded": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  }
+                ],
+                "indexes": [
+                  {
+                    "expanded": false,
+                    "unique": true,
+                    "name": "PRIMARY",
+                    "indexColumns": [
+                      {
+                        "orderType": "ASC",
+                        "expanded": true,
+                        "name": "id",
+                        "ordinalPosition": 1
+                      }
+                    ]
+                  }
+                ],
+                "columns": [
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": false,
+                    "autoIncrement": true,
+                    "name": "id",
+                    "ordinalPosition": 1
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "houseLotSize",
+                    "ordinalPosition": 2
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "houseNumberOfBaths",
+                    "ordinalPosition": 3
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "housePrice",
+                    "ordinalPosition": 4
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "houseNumberOfBedrooms",
+                    "ordinalPosition": 5
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "houseSize",
+                    "ordinalPosition": 6
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "housePictures",
+                    "ordinalPosition": 7
+                  }
+                ],
+                "name": "zillow"
+              }
+            ],
+            "expanded": true,
+            "name": "stiya",
+            "enabled": true
+          }
+        ],
+        "typeName": "MySQL",
+        "ipAddress": "54.153.109.187",
+        "name": "stiya",
+        "enabled": true,
+        "username": "root"
+      }
+    ],
+    "enabled": true
+  }
+}
