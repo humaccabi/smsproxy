@@ -5,25 +5,20 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import java.util.LinkedHashMap;
 
-import com.plivo.helper.api.client.RestAPI;
-import com.plivo.helper.api.response.message.Message;
-import com.plivo.helper.api.response.message.MessageFactory;
-import com.plivo.helper.exception.PlivoException;
-
 public class Main {
     public static void main(String[] args) {
     	port(8080);   	
 
         post("/receive_sms",           SMSController.receiveSMS);
-        
-        String authId  = "MAZDQWNJFJMDK3NTY4N2";
-        String authToken  = "NTI1YTM5YTA1ZjgzMGNlNDQwMGFhNWJlMTliMjZh";
-        RestAPI api = new RestAPI(authId, authToken, "v1");
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
-        parameters.put("src", "16575295295"); // Sender's phone number with country code
-        parameters.put("dst", "972547963359"); // Receiver's phone number with country code
-        parameters.put("text", "Hi, text from Eli"); // Your SMS text message
-        parameters.put("method", "GET"); // The method used to call the url
+//        
+//        String authId  = "MAZDQWNJFJMDK3NTY4N2";
+//        String authToken  = "NTI1YTM5YTA1ZjgzMGNlNDQwMGFhNWJlMTliMjZh";
+//        //RestAPI api = new RestAPI(authId, authToken, "v1");
+//        LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
+//        parameters.put("src", "16575295295"); // Sender's phone number with country code
+//        parameters.put("dst", "972547963359"); // Receiver's phone number with country code
+//        parameters.put("text", "Hi, text from Eli"); // Your SMS text message
+//        parameters.put("method", "GET"); // The method used to call the url
 
         try {
 //            // Send the message

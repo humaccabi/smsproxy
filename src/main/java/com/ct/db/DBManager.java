@@ -1,4 +1,4 @@
-package com.model.db;
+package com.ct.db;
 
 import com.speedment.Speedment;
 
@@ -9,7 +9,7 @@ public class DBManager {
 	public static Speedment Instatnce() {
 
 		if (speedment == null) {
-			//speedment = new DbApplication().withPassword("PHjCLJ9o9zJB").build();
+			speedment = new DbApplication().withPassword("UALBmkSbCFN9").build();
 		}
 
 		return speedment;
