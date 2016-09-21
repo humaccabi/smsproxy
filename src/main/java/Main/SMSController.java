@@ -8,16 +8,30 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.twilio.sdk.resource.instance.Account;
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
 
 import com.plivo.helper.api.client.RestAPI;
 import com.plivo.helper.api.response.message.MessageResponse;
 import com.plivo.helper.exception.PlivoException;
-import com.plivo.helper.xml.elements.Message;
+//import com.plivo.helper.xml.elements.Message;
 import com.plivo.helper.xml.elements.PlivoResponse;
 
 import spark.Request;
 import spark.Response;
 import spark.Route;
+
+
+
 
 public class SMSController {
 
@@ -25,7 +39,9 @@ public class SMSController {
 	static Set<String> freeNumbers = new HashSet<String>();
 	static HashMap<String, String> usersToRandNumberMap = new HashMap<String, String>();
 	static HashMap<String, String> randNumberToSexterMap = new HashMap<String, String>();
-	static String ourNumber = "16575295295";
+	static String ourNumber = "+15622842958";
+    public static final String ACCOUNT_SID = "AC0ff7317d059cfccc68dd06ad0d14d8aa";
+    public static final String AUTH_TOKEN = "c7a5192a45f3c6c14ecf80ff7dde97c0";
 	// user to new random number
 	// rand number to sexter
 	//
@@ -42,14 +58,17 @@ public class SMSController {
 		init();
 		String from_number = request.queryParams("From");
 		String to_number = request.queryParams("To");
-		String text = request.queryParams("Text");
+		String text = request.queryParams("Body");
 		System.out.println("Message received - From: " + from_number + ", To: " + to_number + ", Text: " + text);
+		
 
 		if (isShouldRegister(text)) {
 			sexters.add(text);
 			sendMsg(ourNumber, from_number, "Welcome to CyberTexting");
 		}
-
+		
+		return "";
+/*
 		String from_forward = chooseNumber(from_number);
 		System.out.println(from_forward);
 		String to_forward = chooseSexter(from_number);
@@ -57,6 +76,7 @@ public class SMSController {
 		sendMsg(from_number, to_forward, text);
 		//response.raw().addHeader("Content-Type", "text/xml");
 		return "";
+		*/
 	};
 
 	private static String chooseSexter(String randNumber) {
@@ -84,23 +104,17 @@ public class SMSController {
 	}
 
 	private static void sendMsg(String from, String to, String text) {
-		String authId = "MAZDQWNJFJMDK3NTY4N2";
-		String authToken = "NTI1YTM5YTA1ZjgzMGNlNDQwMGFhNWJlMTliMjZh";
-		RestAPI api = new RestAPI(authId, authToken, "v1");
-		LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
-		parameters.put("src", "16575295295"); // Sender's phone number with //									
-		parameters.put("dst", "14085135253"); // Receiver's phone number with //										
-		parameters.put("text", "Hi, text from Eli"); // Your SMS text message
-		MessageResponse msgResponse;
-		try {
-			msgResponse = api.sendMessage(parameters);
-			System.out.println(msgResponse);
-			if (msgResponse.serverCode == 202) {
-				System.out.println("Message UUID : " + msgResponse.messageUuids.get(0).toString());
-			} else {
-				System.out.println(msgResponse.error);
-			}
-		} catch (PlivoException e) {
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+        Account account = client.getAccount();
+
+        MessageFactory messageFactory = account.getMessageFactory();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("To", to)); 
+        params.add(new BasicNameValuePair("From", ourNumber)); 
+        params.add(new BasicNameValuePair("Body", text));
+        try {
+			Message sms = messageFactory.create(params);
+		} catch (TwilioRestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
