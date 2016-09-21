@@ -8,7 +8,7 @@
     "dbmses": [
       {
         "expanded": true,
-        "port": 3306,
+        "port": 3306.0,
         "schemas": [
           {
             "tables": [
@@ -22,7 +22,7 @@
                         "name": "phoneExtensions_phoneNumber",
                         "foreignColumnName": "phoneNumber",
                         "foreignTableName": "phoneextensions",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "name": "fk_activeSessions_phoneExtensions1",
@@ -36,7 +36,7 @@
                         "name": "sexters_phoneNumber",
                         "foreignColumnName": "phoneNumber",
                         "foreignTableName": "sexters",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "name": "fk_sexters_has_users_sexters",
@@ -50,7 +50,7 @@
                         "name": "users_phoneNumber",
                         "foreignColumnName": "phoneNumber",
                         "foreignTableName": "users",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "name": "fk_sexters_has_users_users1",
@@ -62,17 +62,17 @@
                   {
                     "expanded": true,
                     "name": "phoneExtensions_phoneNumber",
-                    "ordinalPosition": 3
+                    "ordinalPosition": 3.0
                   },
                   {
                     "expanded": true,
                     "name": "sexters_phoneNumber",
-                    "ordinalPosition": 1
+                    "ordinalPosition": 1.0
                   },
                   {
                     "expanded": true,
                     "name": "users_phoneNumber",
-                    "ordinalPosition": 2
+                    "ordinalPosition": 2.0
                   }
                 ],
                 "indexes": [
@@ -85,19 +85,19 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "sexters_phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       },
                       {
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "phoneExtensions_phoneNumber",
-                        "ordinalPosition": 3
+                        "ordinalPosition": 3.0
                       },
                       {
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "users_phoneNumber",
-                        "ordinalPosition": 2
+                        "ordinalPosition": 2.0
                       }
                     ],
                     "enabled": true
@@ -111,7 +111,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "phoneExtensions_phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -125,7 +125,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "sexters_phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -139,7 +139,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "users_phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -152,7 +152,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "sexters_phoneNumber",
-                    "ordinalPosition": 1,
+                    "ordinalPosition": 1.0,
                     "enabled": true
                   },
                   {
@@ -161,7 +161,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "users_phoneNumber",
-                    "ordinalPosition": 2,
+                    "ordinalPosition": 2.0,
                     "enabled": true
                   },
                   {
@@ -170,7 +170,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "phoneExtensions_phoneNumber",
-                    "ordinalPosition": 3,
+                    "ordinalPosition": 3.0,
                     "enabled": true
                   }
                 ],
@@ -183,7 +183,7 @@
                   {
                     "expanded": true,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1
+                    "ordinalPosition": 1.0
                   }
                 ],
                 "indexes": [
@@ -196,7 +196,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -209,7 +209,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1,
+                    "ordinalPosition": 1.0,
                     "enabled": true
                   },
                   {
@@ -218,7 +218,7 @@
                     "expanded": true,
                     "nullable": true,
                     "name": "isActive",
-                    "ordinalPosition": 2,
+                    "ordinalPosition": 2.0,
                     "enabled": true
                   }
                 ],
@@ -226,12 +226,12 @@
                 "enabled": true
               },
               {
-                "expanded": false,
+                "expanded": true,
                 "primaryKeyColumns": [
                   {
                     "expanded": true,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1
+                    "ordinalPosition": 1.0
                   }
                 ],
                 "indexes": [
@@ -244,7 +244,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -257,7 +257,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1,
+                    "ordinalPosition": 1.0,
                     "enabled": true
                   },
                   {
@@ -266,7 +266,7 @@
                     "expanded": true,
                     "nullable": true,
                     "name": "balance",
-                    "ordinalPosition": 2,
+                    "ordinalPosition": 2.0,
                     "enabled": true
                   },
                   {
@@ -275,7 +275,25 @@
                     "expanded": true,
                     "nullable": true,
                     "name": "timestamp",
-                    "ordinalPosition": 3,
+                    "ordinalPosition": 3.0,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.Integer",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.IntegerIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "isOnline",
+                    "ordinalPosition": 4,
+                    "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "registrationPhase",
+                    "ordinalPosition": 5,
                     "enabled": true
                   }
                 ],
@@ -288,7 +306,7 @@
                   {
                     "expanded": true,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1
+                    "ordinalPosition": 1.0
                   }
                 ],
                 "indexes": [
@@ -301,7 +319,7 @@
                         "orderType": "ASC",
                         "expanded": true,
                         "name": "phoneNumber",
-                        "ordinalPosition": 1
+                        "ordinalPosition": 1.0
                       }
                     ],
                     "enabled": true
@@ -314,7 +332,7 @@
                     "expanded": true,
                     "nullable": false,
                     "name": "phoneNumber",
-                    "ordinalPosition": 1,
+                    "ordinalPosition": 1.0,
                     "enabled": true
                   },
                   {
@@ -323,7 +341,7 @@
                     "expanded": true,
                     "nullable": true,
                     "name": "credit",
-                    "ordinalPosition": 2,
+                    "ordinalPosition": 2.0,
                     "enabled": true
                   },
                   {
@@ -332,8 +350,16 @@
                     "expanded": true,
                     "nullable": true,
                     "name": "timestamp",
-                    "ordinalPosition": 3,
+                    "ordinalPosition": 3.0,
                     "enabled": true
+                  },
+                  {
+                    "databaseType": "java.lang.String",
+                    "typeMapper": "com.speedment.config.db.mapper.identity.StringIdentityMapper",
+                    "expanded": true,
+                    "nullable": true,
+                    "name": "registrationPhase",
+                    "ordinalPosition": 4
                   }
                 ],
                 "name": "users",
@@ -345,9 +371,9 @@
             "enabled": true
           }
         ],
+        "name": "db",
         "typeName": "MySQL",
         "ipAddress": "54.201.14.42",
-        "name": "db",
         "enabled": true,
         "username": "root"
       }

@@ -25,6 +25,7 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
     private String phoneNumber;
     private Double credit;
     private String timestamp;
+    private String registrationPhase;
     
     protected GeneratedUsersImpl() {
         
@@ -46,6 +47,11 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
     }
     
     @Override
+    public Optional<String> getRegistrationPhase() {
+        return Optional.ofNullable(registrationPhase);
+    }
+    
+    @Override
     public final Users setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
@@ -64,6 +70,12 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
     }
     
     @Override
+    public final Users setRegistrationPhase(String registrationPhase) {
+        this.registrationPhase = registrationPhase;
+        return this;
+    }
+    
+    @Override
     public Stream<Activesessions> findActivesessionsesByUsersPhoneNumber() {
         return managerOf_(Activesessions.class)
                 .stream().filter(Activesessions.USERS_PHONE_NUMBER.equal(this.getPhoneNumber()));
@@ -75,6 +87,7 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
         sj.add("phoneNumber = "+Objects.toString(getPhoneNumber()));
         sj.add("credit = "+Objects.toString(getCredit().orElse(null)));
         sj.add("timestamp = "+Objects.toString(getTimestamp().orElse(null)));
+        sj.add("registrationPhase = "+Objects.toString(getRegistrationPhase().orElse(null)));
         return "UsersImpl "+sj.toString();
     }
     
@@ -86,6 +99,7 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
         if (!Objects.equals(this.getPhoneNumber(), thatUsers.getPhoneNumber())) {return false; }
         if (!Objects.equals(this.getCredit(), thatUsers.getCredit())) {return false; }
         if (!Objects.equals(this.getTimestamp(), thatUsers.getTimestamp())) {return false; }
+        if (!Objects.equals(this.getRegistrationPhase(), thatUsers.getRegistrationPhase())) {return false; }
         return true;
     }
     
@@ -95,6 +109,7 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
         hash = 31 * hash + Objects.hashCode(getPhoneNumber());
         hash = 31 * hash + Objects.hashCode(getCredit());
         hash = 31 * hash + Objects.hashCode(getTimestamp());
+        hash = 31 * hash + Objects.hashCode(getRegistrationPhase());
         return hash;
     }
     

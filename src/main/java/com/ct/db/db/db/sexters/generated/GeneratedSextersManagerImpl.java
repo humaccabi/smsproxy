@@ -40,6 +40,8 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
             entity.setPhoneNumber(resultSet.getString(1));
             entity.setBalance(resultSet.getString(2));
             entity.setTimestamp(resultSet.getString(3));
+            entity.setIsOnline(getInt(resultSet, 4));
+            entity.setRegistrationPhase(resultSet.getString(5));
         }
         catch (SQLException sqle) {
             throw new SpeedmentException(sqle);
@@ -63,6 +65,8 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
             case PHONE_NUMBER : return entity.getPhoneNumber();
             case BALANCE : return entity.getBalance().orElse(null);
             case TIMESTAMP : return entity.getTimestamp().orElse(null);
+            case IS_ONLINE : return entity.getIsOnline().orElse(null);
+            case REGISTRATION_PHASE : return entity.getRegistrationPhase().orElse(null);
             default : throw new IllegalArgumentException("Unknown identifier '" + identifier + "'.");
         }
     }
@@ -73,6 +77,8 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
             case PHONE_NUMBER : entity.setPhoneNumber((String) value); break;
             case BALANCE : entity.setBalance((String) value); break;
             case TIMESTAMP : entity.setTimestamp((String) value); break;
+            case IS_ONLINE : entity.setIsOnline((Integer) value); break;
+            case REGISTRATION_PHASE : entity.setRegistrationPhase((String) value); break;
             default : throw new IllegalArgumentException("Unknown identifier '" + identifier + "'.");
         }
     }
@@ -82,7 +88,9 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
         return Stream.of(
             Sexters.PHONE_NUMBER,
             Sexters.BALANCE,
-            Sexters.TIMESTAMP
+            Sexters.TIMESTAMP,
+            Sexters.IS_ONLINE,
+            Sexters.REGISTRATION_PHASE
         );
     }
     
@@ -110,6 +118,8 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
         copy.setPhoneNumber(source.getPhoneNumber());
         source.getBalance().ifPresent(copy::setBalance);
         source.getTimestamp().ifPresent(copy::setTimestamp);
+        source.getIsOnline().ifPresent(copy::setIsOnline);
+        source.getRegistrationPhase().ifPresent(copy::setRegistrationPhase);
         
         return copy;
     }

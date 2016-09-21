@@ -3,9 +3,12 @@ package com.ct.db.db.db.sexters.generated;
 import com.ct.db.db.db.activesessions.Activesessions;
 import com.ct.db.db.db.sexters.Sexters;
 import com.speedment.Entity;
+import com.speedment.config.db.mapper.identity.IntegerIdentityMapper;
 import com.speedment.config.db.mapper.identity.StringIdentityMapper;
+import com.speedment.field.ComparableField;
 import com.speedment.field.FieldIdentifier;
 import com.speedment.field.StringField;
+import com.speedment.internal.core.field.ComparableFieldImpl;
 import com.speedment.internal.core.field.StringFieldImpl;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -38,6 +41,16 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * using the {@link Sexters#getTimestamp()} method.
      */
     final StringField<Sexters, String> TIMESTAMP = new StringFieldImpl<>(Identifier.TIMESTAMP, o -> o.getTimestamp().orElse(null), Sexters::setTimestamp, new StringIdentityMapper(), false);
+    /**
+     * This Field corresponds to the {@link Sexters} field that can be obtained
+     * using the {@link Sexters#getIsOnline()} method.
+     */
+    final ComparableField<Sexters, Integer, Integer> IS_ONLINE = new ComparableFieldImpl<>(Identifier.IS_ONLINE, o -> o.getIsOnline().orElse(null), Sexters::setIsOnline, new IntegerIdentityMapper(), false);
+    /**
+     * This Field corresponds to the {@link Sexters} field that can be obtained
+     * using the {@link Sexters#getRegistrationPhase()} method.
+     */
+    final StringField<Sexters, String> REGISTRATION_PHASE = new StringFieldImpl<>(Identifier.REGISTRATION_PHASE, o -> o.getRegistrationPhase().orElse(null), Sexters::setRegistrationPhase, new StringIdentityMapper(), false);
     
     /**
      * Returns the phoneNumber of this Sexters. The phoneNumber field corresponds
@@ -62,6 +75,22 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * @return the timestamp of this Sexters
      */
     Optional<String> getTimestamp();
+    
+    /**
+     * Returns the isOnline of this Sexters. The isOnline field corresponds to
+     * the database column db.db.sexters.isOnline.
+     * 
+     * @return the isOnline of this Sexters
+     */
+    Optional<Integer> getIsOnline();
+    
+    /**
+     * Returns the registrationPhase of this Sexters. The registrationPhase field
+     * corresponds to the database column db.db.sexters.registrationPhase.
+     * 
+     * @return the registrationPhase of this Sexters
+     */
+    Optional<String> getRegistrationPhase();
     
     /**
      * Sets the phoneNumber of this Sexters. The phoneNumber field corresponds to
@@ -89,6 +118,24 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * @return this Sexters instance
      */
     Sexters setTimestamp(String timestamp);
+    
+    /**
+     * Sets the isOnline of this Sexters. The isOnline field corresponds to the
+     * database column db.db.sexters.isOnline.
+     * 
+     * @param isOnline to set of this Sexters
+     * @return this Sexters instance
+     */
+    Sexters setIsOnline(Integer isOnline);
+    
+    /**
+     * Sets the registrationPhase of this Sexters. The registrationPhase field
+     * corresponds to the database column db.db.sexters.registrationPhase.
+     * 
+     * @param registrationPhase to set of this Sexters
+     * @return this Sexters instance
+     */
+    Sexters setRegistrationPhase(String registrationPhase);
     
     /**
      * Creates and returns a {@link Stream} of all {@link Activesessions}
@@ -130,7 +177,9 @@ public interface GeneratedSexters extends Entity<Sexters> {
         
         PHONE_NUMBER ("phoneNumber"),
         BALANCE ("balance"),
-        TIMESTAMP ("timestamp");
+        TIMESTAMP ("timestamp"),
+        IS_ONLINE ("isOnline"),
+        REGISTRATION_PHASE ("registrationPhase");
         
         private final String columnName;
         

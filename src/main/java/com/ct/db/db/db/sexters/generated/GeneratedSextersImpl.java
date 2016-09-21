@@ -25,6 +25,8 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     private String phoneNumber;
     private String balance;
     private String timestamp;
+    private Integer isOnline;
+    private String registrationPhase;
     
     protected GeneratedSextersImpl() {
         
@@ -46,6 +48,16 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     }
     
     @Override
+    public Optional<Integer> getIsOnline() {
+        return Optional.ofNullable(isOnline);
+    }
+    
+    @Override
+    public Optional<String> getRegistrationPhase() {
+        return Optional.ofNullable(registrationPhase);
+    }
+    
+    @Override
     public final Sexters setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
@@ -64,6 +76,18 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     }
     
     @Override
+    public final Sexters setIsOnline(Integer isOnline) {
+        this.isOnline = isOnline;
+        return this;
+    }
+    
+    @Override
+    public final Sexters setRegistrationPhase(String registrationPhase) {
+        this.registrationPhase = registrationPhase;
+        return this;
+    }
+    
+    @Override
     public Stream<Activesessions> findActivesessionsesBySextersPhoneNumber() {
         return managerOf_(Activesessions.class)
                 .stream().filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(this.getPhoneNumber()));
@@ -75,6 +99,8 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
         sj.add("phoneNumber = "+Objects.toString(getPhoneNumber()));
         sj.add("balance = "+Objects.toString(getBalance().orElse(null)));
         sj.add("timestamp = "+Objects.toString(getTimestamp().orElse(null)));
+        sj.add("isOnline = "+Objects.toString(getIsOnline().orElse(null)));
+        sj.add("registrationPhase = "+Objects.toString(getRegistrationPhase().orElse(null)));
         return "SextersImpl "+sj.toString();
     }
     
@@ -86,6 +112,8 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
         if (!Objects.equals(this.getPhoneNumber(), thatSexters.getPhoneNumber())) {return false; }
         if (!Objects.equals(this.getBalance(), thatSexters.getBalance())) {return false; }
         if (!Objects.equals(this.getTimestamp(), thatSexters.getTimestamp())) {return false; }
+        if (!Objects.equals(this.getIsOnline(), thatSexters.getIsOnline())) {return false; }
+        if (!Objects.equals(this.getRegistrationPhase(), thatSexters.getRegistrationPhase())) {return false; }
         return true;
     }
     
@@ -95,6 +123,8 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
         hash = 31 * hash + Objects.hashCode(getPhoneNumber());
         hash = 31 * hash + Objects.hashCode(getBalance());
         hash = 31 * hash + Objects.hashCode(getTimestamp());
+        hash = 31 * hash + Objects.hashCode(getIsOnline());
+        hash = 31 * hash + Objects.hashCode(getRegistrationPhase());
         return hash;
     }
     

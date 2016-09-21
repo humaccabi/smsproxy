@@ -41,6 +41,11 @@ public interface GeneratedUsers extends Entity<Users> {
      * using the {@link Users#getTimestamp()} method.
      */
     final StringField<Users, String> TIMESTAMP = new StringFieldImpl<>(Identifier.TIMESTAMP, o -> o.getTimestamp().orElse(null), Users::setTimestamp, new StringIdentityMapper(), false);
+    /**
+     * This Field corresponds to the {@link Users} field that can be obtained
+     * using the {@link Users#getRegistrationPhase()} method.
+     */
+    final StringField<Users, String> REGISTRATION_PHASE = new StringFieldImpl<>(Identifier.REGISTRATION_PHASE, o -> o.getRegistrationPhase().orElse(null), Users::setRegistrationPhase, new StringIdentityMapper(), false);
     
     /**
      * Returns the phoneNumber of this Users. The phoneNumber field corresponds
@@ -65,6 +70,14 @@ public interface GeneratedUsers extends Entity<Users> {
      * @return the timestamp of this Users
      */
     Optional<String> getTimestamp();
+    
+    /**
+     * Returns the registrationPhase of this Users. The registrationPhase field
+     * corresponds to the database column db.db.users.registrationPhase.
+     * 
+     * @return the registrationPhase of this Users
+     */
+    Optional<String> getRegistrationPhase();
     
     /**
      * Sets the phoneNumber of this Users. The phoneNumber field corresponds to
@@ -92,6 +105,15 @@ public interface GeneratedUsers extends Entity<Users> {
      * @return this Users instance
      */
     Users setTimestamp(String timestamp);
+    
+    /**
+     * Sets the registrationPhase of this Users. The registrationPhase field
+     * corresponds to the database column db.db.users.registrationPhase.
+     * 
+     * @param registrationPhase to set of this Users
+     * @return this Users instance
+     */
+    Users setRegistrationPhase(String registrationPhase);
     
     /**
      * Creates and returns a {@link Stream} of all {@link Activesessions}
@@ -133,7 +155,8 @@ public interface GeneratedUsers extends Entity<Users> {
         
         PHONE_NUMBER ("phoneNumber"),
         CREDIT ("credit"),
-        TIMESTAMP ("timestamp");
+        TIMESTAMP ("timestamp"),
+        REGISTRATION_PHASE ("registrationPhase");
         
         private final String columnName;
         

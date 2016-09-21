@@ -40,6 +40,7 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
             entity.setPhoneNumber(resultSet.getString(1));
             entity.setCredit(getDouble(resultSet, 2));
             entity.setTimestamp(resultSet.getString(3));
+            entity.setRegistrationPhase(resultSet.getString(4));
         }
         catch (SQLException sqle) {
             throw new SpeedmentException(sqle);
@@ -63,6 +64,7 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
             case PHONE_NUMBER : return entity.getPhoneNumber();
             case CREDIT : return entity.getCredit().orElse(null);
             case TIMESTAMP : return entity.getTimestamp().orElse(null);
+            case REGISTRATION_PHASE : return entity.getRegistrationPhase().orElse(null);
             default : throw new IllegalArgumentException("Unknown identifier '" + identifier + "'.");
         }
     }
@@ -73,6 +75,7 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
             case PHONE_NUMBER : entity.setPhoneNumber((String) value); break;
             case CREDIT : entity.setCredit((Double) value); break;
             case TIMESTAMP : entity.setTimestamp((String) value); break;
+            case REGISTRATION_PHASE : entity.setRegistrationPhase((String) value); break;
             default : throw new IllegalArgumentException("Unknown identifier '" + identifier + "'.");
         }
     }
@@ -82,7 +85,8 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
         return Stream.of(
             Users.PHONE_NUMBER,
             Users.CREDIT,
-            Users.TIMESTAMP
+            Users.TIMESTAMP,
+            Users.REGISTRATION_PHASE
         );
     }
     
@@ -110,6 +114,7 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
         copy.setPhoneNumber(source.getPhoneNumber());
         source.getCredit().ifPresent(copy::setCredit);
         source.getTimestamp().ifPresent(copy::setTimestamp);
+        source.getRegistrationPhase().ifPresent(copy::setRegistrationPhase);
         
         return copy;
     }
