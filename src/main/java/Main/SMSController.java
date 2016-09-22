@@ -37,6 +37,7 @@ public class SMSController {
 	static String ourSextersNumber = "+15622842958";
     public static final String ACCOUNT_SID = "AC0ff7317d059cfccc68dd06ad0d14d8aa";
     public static final String AUTH_TOKEN = "c7a5192a45f3c6c14ecf80ff7dde97c0";
+    public static final boolean isTrial = true;
     final static Manager<Sexters> sexters = DBManager.Instatnce().managerOf(Sexters.class);
     final static Manager<Users> users = DBManager.Instatnce().managerOf(Users.class);
     final static Manager<Phoneextensions> phoneExtensions = DBManager.Instatnce().managerOf(Phoneextensions.class);
@@ -52,8 +53,8 @@ public class SMSController {
 		String text = request.queryParams("Body");
 		System.out.println("Message received - From: " + from_number + ", To: " + to_number + ", Text: " + text);
 			
-		if (register(from_number, to_number, text)) {
-			sendMsg(to_number, from_number, "Welcome to CyberTexting");
+		if (!register(from_number, to_number, text)) {
+			System.out.println("User : " + from_number + " is during the registration process.");
 			return "";
 		}		
 		
@@ -88,23 +89,29 @@ public class SMSController {
 	}
 
 	private static Activesessions getSession(String from_number, String to_number) {
-		if (to_number.equals(ourUsersNumber)){
+		if (to_number.equals(ourUsersNumber) && (from_number.contains("5135253"))){ //Need to remove the && after testing ended
 			Optional<Activesessions> result = sessions.stream()
 					.filter(Activesessions.USERS_PHONE_NUMBER.equal(from_number))
 					.findAny();
-			return result.orElseGet(null);
+			if (!result.isPresent()) 
+				return null;
+			else
+				return result.get();
 		}
 		
 		Optional<Activesessions> result = sessions.stream()
 				.filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(from_number))
 				.filter(Activesessions.PHONE_EXTENSIONS_PHONE_NUMBER.equal(to_number))
 				.findAny();
-		return result.orElseGet(null);
+		if (!result.isPresent()) 
+			return null;
+		else
+			return result.get();
 		
 	}
 
-	private static void handleMsg( Activesessions session, String to_number, String text) {
-		if (to_number.equals(ourUsersNumber)){
+	private static void handleMsg(Activesessions session, String to_number, String text) {
+		if (to_number.equals(ourUsersNumber) && (text.contains("###"))){
 			sendMsg(session.getPhoneExtensionsPhoneNumber(), session.getSextersPhoneNumber(), text);
 		} else 
 			sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), text);
@@ -137,27 +144,74 @@ public class SMSController {
 	}
 
 	private static Boolean register(String from_number, String to_number, String text) {
+		final String finalUsersRegistrationStep = "2";
+		final String finalSextersRegistrationStep = "2";
 		// if to_number is for users
-		
-		Optional<Users> userResult = users.stream()
-				.filter(Users.PHONE_NUMBER.contains(from_number))
-				.findAny();
-		if (!userResult.isPresent()) {
-			System.out.println("user does not exist, phone number received: " + from_number);
-			// send welcome and register sms
-			users.newEmptyEntity().setPhoneNumber(from_number).persist();
+		if (to_number.equals(ourUsersNumber) && (text.contains("#"))) { //Need to remove the # when we get another number
+			Optional<Users> userResult = users.stream()
+					.filter(Users.PHONE_NUMBER.contains(from_number))
+					.findAny();
+			if (!userResult.isPresent()) {
+				System.out.println("user does not exist, phone number received: " + from_number);
+				sendMsg(to_number, from_number, "Welcome to CyberTexting. YOU MUST BE OVER 18 AND AGREE TO THE TERMS (http://www.cybertexting.co/terms) BEFORE CONTINUING. Please reply I AGREE to continue.");
+				users.newEmptyEntity()
+					.setPhoneNumber(from_number)
+					.setCredit(0.0)
+					.setRegistrationPhase("1 - Waiting for terms approval")
+					.persist();
+				return false;
+			} else { //Handle the next steps of the registration
+				if (userResult.get().getRegistrationPhase().get().contains("1")) {
+					if (text.toLowerCase().contains("i agree")) {
+						//TODO - Need to update the data base to step 2
+						System.out.println("User accepted the terms of usage");
+						if (isTrial) {
+							sendMsg(to_number, from_number,"We are currently running a Beta so you get to enjoy 100 free credits! Say Hi to your sexter...");
+						} else {
+							//TODO - Need to send Paypal link to the user.
+						}
+					} else 
+						sendMsg(to_number, from_number,"YOU MUST BE OVER 18 AND AGREE TO THE TERMS (http://www.cybertexting.co/terms) BEFORE CONTINUING. Please reply I AGREE to continue.");
+				}
+			}
+			
+			if (userResult.get().getRegistrationPhase().get().contains(finalUsersRegistrationStep))
+				return true;
+			
+			return false;
+			
+		} else {
+			// if to_number is for sexters	
+			Optional<Sexters> sextersResult = sexters.stream()
+					.filter(Sexters.PHONE_NUMBER.contains(from_number))
+					.findAny();
+			if (!sextersResult.isPresent()) {
+				System.out.println("sexters does not exist, phone number received: " + from_number);
+				sendMsg(to_number, from_number, "Welcome to CyberTexting. In order to be a Sexter YOU MUST BE OVER 18 AND AGREE TO THE TERMS (http://www.cybertexting.co/terms) BEFORE CONTINUING. Please reply I AGREE to continue.");
+				sexters.newEmptyEntity()
+					.setPhoneNumber(from_number)
+					.setRegistrationPhase("1 - Waiting for terms approval")
+					.setBalance("0")
+					.setIsOnline(0)
+					.persist();
+				return false;
+			} else { //Handle the next steps of the registration
+				if (sextersResult.get().getRegistrationPhase().get().contains("1")) {
+					if (text.toLowerCase().contains("i agree")) {
+						//TODO - Need to update the data base to step 2
+						System.out.println("Sexter accepted the terms of usage");
+						sendMsg(to_number, from_number,"Thank you for joining our Sexters community, please see check out our web-site for important key words (www.cybertexting.co/keywords)");
+					} else { 
+						sendMsg(to_number, from_number,"YOU MUST BE OVER 18 AND AGREE TO THE TERMS (http://www.cybertexting.co/terms) BEFORE CONTINUING. Please reply I AGREE to continue.");
+					}
+				}
+			}
+			
+			if (sextersResult.get().getRegistrationPhase().get().contains(finalSextersRegistrationStep))
+				return true;
+			
+			return false;
 		}
-
-		// if to_number is for sexters	
-		Optional<Sexters> sextersResult = sexters.stream()
-				.filter(Sexters.PHONE_NUMBER.contains(from_number))
-				.findAny();
-		if (!sextersResult.isPresent()) {
-			System.out.println("sexters does not exist, phone number received: " + from_number);
-			// send welcome sms 
-			sexters.newEmptyEntity().setPhoneNumber(from_number).persist();
-		}
-		return false;
 	}
 
 }
