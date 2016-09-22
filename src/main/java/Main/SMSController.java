@@ -164,6 +164,10 @@ public class SMSController {
 				if (userResult.get().getRegistrationPhase().get().contains("1")) {
 					if (text.toLowerCase().contains("i agree")) {
 						//TODO - Need to update the data base to step 2
+						users.newEmptyEntity()
+						.setPhoneNumber(from_number)
+						.setRegistrationPhase("2")
+						.update();
 						System.out.println("User accepted the terms of usage");
 						if (isTrial) {
 							sendMsg(to_number, from_number,"We are currently running a Beta so you get to enjoy 100 free credits! Say Hi to your sexter...");
@@ -198,7 +202,10 @@ public class SMSController {
 			} else { //Handle the next steps of the registration
 				if (sextersResult.get().getRegistrationPhase().get().contains("1")) {
 					if (text.toLowerCase().contains("i agree")) {
-						//TODO - Need to update the data base to step 2
+						sexters.newEmptyEntity()
+						.setPhoneNumber(from_number)
+						.setRegistrationPhase("2")
+						.update();
 						System.out.println("Sexter accepted the terms of usage");
 						sendMsg(to_number, from_number,"Thank you for joining our Sexters community, please see check out our web-site for important key words (www.cybertexting.co/keywords)");
 					} else { 
