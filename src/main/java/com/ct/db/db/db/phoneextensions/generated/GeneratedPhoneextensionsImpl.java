@@ -1,13 +1,11 @@
 package com.ct.db.db.db.phoneextensions.generated;
 
-import com.ct.db.db.db.activesessions.Activesessions;
 import com.ct.db.db.db.phoneextensions.Phoneextensions;
 import com.speedment.Speedment;
 import com.speedment.internal.core.code.AbstractBaseEntity;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
-import java.util.stream.Stream;
 import javax.annotation.Generated;
 
 /**
@@ -52,12 +50,6 @@ public abstract class GeneratedPhoneextensionsImpl extends AbstractBaseEntity<Ph
     }
     
     @Override
-    public Stream<Activesessions> findActivesessionsesByPhoneExtensionsPhoneNumber() {
-        return managerOf_(Activesessions.class)
-                .stream().filter(Activesessions.PHONE_EXTENSIONS_PHONE_NUMBER.equal(this.getPhoneNumber()));
-    }
-    
-    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("phoneNumber = "+Objects.toString(getPhoneNumber()));
@@ -86,10 +78,5 @@ public abstract class GeneratedPhoneextensionsImpl extends AbstractBaseEntity<Ph
     @Override
     public Class<Phoneextensions> entityClass() {
         return Phoneextensions.class;
-    }
-    
-    @Override
-    public Stream<Activesessions> findActivesessionses() {
-        return findActivesessionsesByPhoneExtensionsPhoneNumber();
     }
 }

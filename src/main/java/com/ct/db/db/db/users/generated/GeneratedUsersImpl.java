@@ -1,13 +1,11 @@
 package com.ct.db.db.db.users.generated;
 
-import com.ct.db.db.db.activesessions.Activesessions;
 import com.ct.db.db.db.users.Users;
 import com.speedment.Speedment;
 import com.speedment.internal.core.code.AbstractBaseEntity;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
-import java.util.stream.Stream;
 import javax.annotation.Generated;
 
 /**
@@ -76,12 +74,6 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
     }
     
     @Override
-    public Stream<Activesessions> findActivesessionsesByUsersPhoneNumber() {
-        return managerOf_(Activesessions.class)
-                .stream().filter(Activesessions.USERS_PHONE_NUMBER.equal(this.getPhoneNumber()));
-    }
-    
-    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("phoneNumber = "+Objects.toString(getPhoneNumber()));
@@ -116,10 +108,5 @@ public abstract class GeneratedUsersImpl extends AbstractBaseEntity<Users> imple
     @Override
     public Class<Users> entityClass() {
         return Users.class;
-    }
-    
-    @Override
-    public Stream<Activesessions> findActivesessionses() {
-        return findActivesessionsesByUsersPhoneNumber();
     }
 }

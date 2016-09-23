@@ -1,11 +1,7 @@
 package com.ct.db.db.db.activesessions.generated;
 
 import com.ct.db.db.db.activesessions.Activesessions;
-import com.ct.db.db.db.phoneextensions.Phoneextensions;
-import com.ct.db.db.db.sexters.Sexters;
-import com.ct.db.db.db.users.Users;
 import com.speedment.Speedment;
-import com.speedment.exception.SpeedmentException;
 import com.speedment.internal.core.code.AbstractBaseEntity;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -23,44 +19,18 @@ import javax.annotation.Generated;
 @Generated("Speedment")
 public abstract class GeneratedActivesessionsImpl extends AbstractBaseEntity<Activesessions> implements Activesessions {
     
-    private String sextersPhoneNumber;
+    private Integer id;
     private String usersPhoneNumber;
-    private String phoneExtensionsPhoneNumber;
+    private String phoneextensionsPhoneNumber;
+    private String sextersPhoneNumber;
     
     protected GeneratedActivesessionsImpl() {
         
     }
     
     @Override
-    public Phoneextensions findPhoneExtensionsPhoneNumber() {
-        return managerOf_(Phoneextensions.class).findAny(Phoneextensions.PHONE_NUMBER, getPhoneExtensionsPhoneNumber())
-            .orElseThrow(() -> new SpeedmentException(
-                "Foreign key constraint error. Phoneextensions is set to " + getPhoneExtensionsPhoneNumber()
-                ));
-            
-    }
-    
-    @Override
-    public Sexters findSextersPhoneNumber() {
-        return managerOf_(Sexters.class).findAny(Sexters.PHONE_NUMBER, getSextersPhoneNumber())
-            .orElseThrow(() -> new SpeedmentException(
-                "Foreign key constraint error. Sexters is set to " + getSextersPhoneNumber()
-                ));
-            
-    }
-    
-    @Override
-    public Users findUsersPhoneNumber() {
-        return managerOf_(Users.class).findAny(Users.PHONE_NUMBER, getUsersPhoneNumber())
-            .orElseThrow(() -> new SpeedmentException(
-                "Foreign key constraint error. Users is set to " + getUsersPhoneNumber()
-                ));
-            
-    }
-    
-    @Override
-    public String getSextersPhoneNumber() {
-        return sextersPhoneNumber;
+    public Integer getId() {
+        return id;
     }
     
     @Override
@@ -69,13 +39,18 @@ public abstract class GeneratedActivesessionsImpl extends AbstractBaseEntity<Act
     }
     
     @Override
-    public String getPhoneExtensionsPhoneNumber() {
-        return phoneExtensionsPhoneNumber;
+    public String getPhoneextensionsPhoneNumber() {
+        return phoneextensionsPhoneNumber;
     }
     
     @Override
-    public final Activesessions setSextersPhoneNumber(String sextersPhoneNumber) {
-        this.sextersPhoneNumber = sextersPhoneNumber;
+    public String getSextersPhoneNumber() {
+        return sextersPhoneNumber;
+    }
+    
+    @Override
+    public final Activesessions setId(Integer id) {
+        this.id = id;
         return this;
     }
     
@@ -86,17 +61,24 @@ public abstract class GeneratedActivesessionsImpl extends AbstractBaseEntity<Act
     }
     
     @Override
-    public final Activesessions setPhoneExtensionsPhoneNumber(String phoneExtensionsPhoneNumber) {
-        this.phoneExtensionsPhoneNumber = phoneExtensionsPhoneNumber;
+    public final Activesessions setPhoneextensionsPhoneNumber(String phoneextensionsPhoneNumber) {
+        this.phoneextensionsPhoneNumber = phoneextensionsPhoneNumber;
+        return this;
+    }
+    
+    @Override
+    public final Activesessions setSextersPhoneNumber(String sextersPhoneNumber) {
+        this.sextersPhoneNumber = sextersPhoneNumber;
         return this;
     }
     
     @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
-        sj.add("sextersPhoneNumber = "+Objects.toString(getSextersPhoneNumber()));
+        sj.add("id = "+Objects.toString(getId()));
         sj.add("usersPhoneNumber = "+Objects.toString(getUsersPhoneNumber()));
-        sj.add("phoneExtensionsPhoneNumber = "+Objects.toString(getPhoneExtensionsPhoneNumber()));
+        sj.add("phoneextensionsPhoneNumber = "+Objects.toString(getPhoneextensionsPhoneNumber()));
+        sj.add("sextersPhoneNumber = "+Objects.toString(getSextersPhoneNumber()));
         return "ActivesessionsImpl "+sj.toString();
     }
     
@@ -105,18 +87,20 @@ public abstract class GeneratedActivesessionsImpl extends AbstractBaseEntity<Act
         if (this == that) { return true; }
         if (!(that instanceof Activesessions)) { return false; }
         final Activesessions thatActivesessions = (Activesessions)that;
-        if (!Objects.equals(this.getSextersPhoneNumber(), thatActivesessions.getSextersPhoneNumber())) {return false; }
+        if (!Objects.equals(this.getId(), thatActivesessions.getId())) {return false; }
         if (!Objects.equals(this.getUsersPhoneNumber(), thatActivesessions.getUsersPhoneNumber())) {return false; }
-        if (!Objects.equals(this.getPhoneExtensionsPhoneNumber(), thatActivesessions.getPhoneExtensionsPhoneNumber())) {return false; }
+        if (!Objects.equals(this.getPhoneextensionsPhoneNumber(), thatActivesessions.getPhoneextensionsPhoneNumber())) {return false; }
+        if (!Objects.equals(this.getSextersPhoneNumber(), thatActivesessions.getSextersPhoneNumber())) {return false; }
         return true;
     }
     
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + Objects.hashCode(getSextersPhoneNumber());
+        hash = 31 * hash + Objects.hashCode(getId());
         hash = 31 * hash + Objects.hashCode(getUsersPhoneNumber());
-        hash = 31 * hash + Objects.hashCode(getPhoneExtensionsPhoneNumber());
+        hash = 31 * hash + Objects.hashCode(getPhoneextensionsPhoneNumber());
+        hash = 31 * hash + Objects.hashCode(getSextersPhoneNumber());
         return hash;
     }
     

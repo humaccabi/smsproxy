@@ -5,9 +5,7 @@ import com.ct.db.db.db.activesessions.ActivesessionsManager;
 import com.speedment.component.ProjectComponent;
 import com.speedment.config.db.Table;
 import com.speedment.internal.core.manager.sql.SqlManager;
-import com.speedment.util.tuple.Tuple3;
-import java.util.Arrays;
-import java.util.List;
+import com.speedment.util.tuple.Tuple1;
 import javax.annotation.Generated;
 
 /**
@@ -23,8 +21,8 @@ import javax.annotation.Generated;
 public interface GeneratedActivesessionsManager extends SqlManager<Activesessions> {
     
     @Override
-    default List<String> primaryKeyFor(Activesessions entity) {
-        return Arrays.asList(entity.getPhoneExtensionsPhoneNumber(), entity.getSextersPhoneNumber(), entity.getUsersPhoneNumber());
+    default Integer primaryKeyFor(Activesessions entity) {
+        return entity.getId();
     }
     
     @Override
@@ -43,5 +41,5 @@ public interface GeneratedActivesessionsManager extends SqlManager<Activesession
     }
     
     @Override
-    Tuple3<Class<String>, Class<String>, Class<String>> getPrimaryKeyClasses();
+    Tuple1<Class<Integer>> getPrimaryKeyClasses();
 }

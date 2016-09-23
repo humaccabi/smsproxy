@@ -34,7 +34,7 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
         setEntityMapper(this::newEntityFrom);
     }
     
-    protected Sexters newEntityFrom(ResultSet resultSet) throws SQLException, SpeedmentException {
+    protected Sexters newEntityFrom(ResultSet resultSet) throws SpeedmentException, SQLException {
         final Sexters entity = newEmptyEntity();
         try {
             entity.setPhoneNumber(resultSet.getString(1));

@@ -1,14 +1,14 @@
 package com.ct.db.db.db.activesessions.generated;
 
 import com.ct.db.db.db.activesessions.Activesessions;
-import com.ct.db.db.db.phoneextensions.Phoneextensions;
-import com.ct.db.db.db.sexters.Sexters;
-import com.ct.db.db.db.users.Users;
 import com.speedment.Entity;
+import com.speedment.config.db.mapper.identity.IntegerIdentityMapper;
 import com.speedment.config.db.mapper.identity.StringIdentityMapper;
+import com.speedment.field.ComparableField;
 import com.speedment.field.FieldIdentifier;
-import com.speedment.field.StringForeignKeyField;
-import com.speedment.internal.core.field.StringForeignKeyFieldImpl;
+import com.speedment.field.StringField;
+import com.speedment.internal.core.field.ComparableFieldImpl;
+import com.speedment.internal.core.field.StringFieldImpl;
 import javax.annotation.Generated;
 
 /**
@@ -25,75 +25,33 @@ public interface GeneratedActivesessions extends Entity<Activesessions> {
     
     /**
      * This Field corresponds to the {@link Activesessions} field that can be
-     * obtained using the {@link Activesessions#getSextersPhoneNumber()} method.
+     * obtained using the {@link Activesessions#getId()} method.
      */
-    final StringForeignKeyField<Activesessions, String, Sexters> SEXTERS_PHONE_NUMBER = new StringForeignKeyFieldImpl<>(Identifier.SEXTERS_PHONE_NUMBER, Activesessions::getSextersPhoneNumber, Activesessions::setSextersPhoneNumber, Activesessions::findSextersPhoneNumber, new StringIdentityMapper(), false);
+    final ComparableField<Activesessions, Integer, Integer> ID = new ComparableFieldImpl<>(Identifier.ID, Activesessions::getId, Activesessions::setId, new IntegerIdentityMapper(), true);
     /**
      * This Field corresponds to the {@link Activesessions} field that can be
      * obtained using the {@link Activesessions#getUsersPhoneNumber()} method.
      */
-    final StringForeignKeyField<Activesessions, String, Users> USERS_PHONE_NUMBER = new StringForeignKeyFieldImpl<>(Identifier.USERS_PHONE_NUMBER, Activesessions::getUsersPhoneNumber, Activesessions::setUsersPhoneNumber, Activesessions::findUsersPhoneNumber, new StringIdentityMapper(), false);
+    final StringField<Activesessions, String> USERS_PHONE_NUMBER = new StringFieldImpl<>(Identifier.USERS_PHONE_NUMBER, Activesessions::getUsersPhoneNumber, Activesessions::setUsersPhoneNumber, new StringIdentityMapper(), false);
     /**
      * This Field corresponds to the {@link Activesessions} field that can be
-     * obtained using the {@link Activesessions#getPhoneExtensionsPhoneNumber()}
+     * obtained using the {@link Activesessions#getPhoneextensionsPhoneNumber()}
      * method.
      */
-    final StringForeignKeyField<Activesessions, String, Phoneextensions> PHONE_EXTENSIONS_PHONE_NUMBER = new StringForeignKeyFieldImpl<>(Identifier.PHONE_EXTENSIONS_PHONE_NUMBER, Activesessions::getPhoneExtensionsPhoneNumber, Activesessions::setPhoneExtensionsPhoneNumber, Activesessions::findPhoneExtensionsPhoneNumber, new StringIdentityMapper(), false);
+    final StringField<Activesessions, String> PHONEEXTENSIONS_PHONE_NUMBER = new StringFieldImpl<>(Identifier.PHONEEXTENSIONS_PHONE_NUMBER, Activesessions::getPhoneextensionsPhoneNumber, Activesessions::setPhoneextensionsPhoneNumber, new StringIdentityMapper(), false);
+    /**
+     * This Field corresponds to the {@link Activesessions} field that can be
+     * obtained using the {@link Activesessions#getSextersPhoneNumber()} method.
+     */
+    final StringField<Activesessions, String> SEXTERS_PHONE_NUMBER = new StringFieldImpl<>(Identifier.SEXTERS_PHONE_NUMBER, Activesessions::getSextersPhoneNumber, Activesessions::setSextersPhoneNumber, new StringIdentityMapper(), false);
     
     /**
-     * Finds and returns the foreign key Entity {@link Phoneextensions}
-     * referenced by the field that can be obtained using {@link
-     * Activesessions#getPhoneExtensionsPhoneNumber()}.
-     * <p>
-     * N.B. The current implementation only supports lazy-loading of the
-     * referenced Entities. This means that if you traverse N Activesessions
-     * entities and call this method for each one, there will be N SQL-queries
-     * executed.
+     * Returns the id of this Activesessions. The id field corresponds to the
+     * database column db.db.activesessions.id.
      * 
-     * @return the foreign key Entity {@link Phoneextensions} referenced by the
-     * field that can be obtained using {@link
-     * Activesessions#getPhoneExtensionsPhoneNumber()}
+     * @return the id of this Activesessions
      */
-    Phoneextensions findPhoneExtensionsPhoneNumber();
-    
-    /**
-     * Finds and returns the foreign key Entity {@link Sexters} referenced by the
-     * field that can be obtained using {@link
-     * Activesessions#getSextersPhoneNumber()}.
-     * <p>
-     * N.B. The current implementation only supports lazy-loading of the
-     * referenced Entities. This means that if you traverse N Activesessions
-     * entities and call this method for each one, there will be N SQL-queries
-     * executed.
-     * 
-     * @return the foreign key Entity {@link Sexters} referenced by the field
-     * that can be obtained using {@link Activesessions#getSextersPhoneNumber()}
-     */
-    Sexters findSextersPhoneNumber();
-    
-    /**
-     * Finds and returns the foreign key Entity {@link Users} referenced by the
-     * field that can be obtained using {@link
-     * Activesessions#getUsersPhoneNumber()}.
-     * <p>
-     * N.B. The current implementation only supports lazy-loading of the
-     * referenced Entities. This means that if you traverse N Activesessions
-     * entities and call this method for each one, there will be N SQL-queries
-     * executed.
-     * 
-     * @return the foreign key Entity {@link Users} referenced by the field that
-     * can be obtained using {@link Activesessions#getUsersPhoneNumber()}
-     */
-    Users findUsersPhoneNumber();
-    
-    /**
-     * Returns the sextersPhoneNumber of this Activesessions. The
-     * sextersPhoneNumber field corresponds to the database column
-     * db.db.activesessions.sexters_phoneNumber.
-     * 
-     * @return the sextersPhoneNumber of this Activesessions
-     */
-    String getSextersPhoneNumber();
+    Integer getId();
     
     /**
      * Returns the usersPhoneNumber of this Activesessions. The usersPhoneNumber
@@ -105,23 +63,31 @@ public interface GeneratedActivesessions extends Entity<Activesessions> {
     String getUsersPhoneNumber();
     
     /**
-     * Returns the phoneExtensionsPhoneNumber of this Activesessions. The
-     * phoneExtensionsPhoneNumber field corresponds to the database column
-     * db.db.activesessions.phoneExtensions_phoneNumber.
+     * Returns the phoneextensionsPhoneNumber of this Activesessions. The
+     * phoneextensionsPhoneNumber field corresponds to the database column
+     * db.db.activesessions.phoneextensions_phoneNumber.
      * 
-     * @return the phoneExtensionsPhoneNumber of this Activesessions
+     * @return the phoneextensionsPhoneNumber of this Activesessions
      */
-    String getPhoneExtensionsPhoneNumber();
+    String getPhoneextensionsPhoneNumber();
     
     /**
-     * Sets the sextersPhoneNumber of this Activesessions. The sextersPhoneNumber
-     * field corresponds to the database column
+     * Returns the sextersPhoneNumber of this Activesessions. The
+     * sextersPhoneNumber field corresponds to the database column
      * db.db.activesessions.sexters_phoneNumber.
      * 
-     * @param sextersPhoneNumber to set of this Activesessions
+     * @return the sextersPhoneNumber of this Activesessions
+     */
+    String getSextersPhoneNumber();
+    
+    /**
+     * Sets the id of this Activesessions. The id field corresponds to the
+     * database column db.db.activesessions.id.
+     * 
+     * @param id to set of this Activesessions
      * @return this Activesessions instance
      */
-    Activesessions setSextersPhoneNumber(String sextersPhoneNumber);
+    Activesessions setId(Integer id);
     
     /**
      * Sets the usersPhoneNumber of this Activesessions. The usersPhoneNumber
@@ -134,20 +100,31 @@ public interface GeneratedActivesessions extends Entity<Activesessions> {
     Activesessions setUsersPhoneNumber(String usersPhoneNumber);
     
     /**
-     * Sets the phoneExtensionsPhoneNumber of this Activesessions. The
-     * phoneExtensionsPhoneNumber field corresponds to the database column
-     * db.db.activesessions.phoneExtensions_phoneNumber.
+     * Sets the phoneextensionsPhoneNumber of this Activesessions. The
+     * phoneextensionsPhoneNumber field corresponds to the database column
+     * db.db.activesessions.phoneextensions_phoneNumber.
      * 
-     * @param phoneExtensionsPhoneNumber to set of this Activesessions
+     * @param phoneextensionsPhoneNumber to set of this Activesessions
      * @return this Activesessions instance
      */
-    Activesessions setPhoneExtensionsPhoneNumber(String phoneExtensionsPhoneNumber);
+    Activesessions setPhoneextensionsPhoneNumber(String phoneextensionsPhoneNumber);
+    
+    /**
+     * Sets the sextersPhoneNumber of this Activesessions. The sextersPhoneNumber
+     * field corresponds to the database column
+     * db.db.activesessions.sexters_phoneNumber.
+     * 
+     * @param sextersPhoneNumber to set of this Activesessions
+     * @return this Activesessions instance
+     */
+    Activesessions setSextersPhoneNumber(String sextersPhoneNumber);
     
     enum Identifier implements FieldIdentifier<Activesessions> {
         
-        SEXTERS_PHONE_NUMBER ("sexters_phoneNumber"),
+        ID ("id"),
         USERS_PHONE_NUMBER ("users_phoneNumber"),
-        PHONE_EXTENSIONS_PHONE_NUMBER ("phoneExtensions_phoneNumber");
+        PHONEEXTENSIONS_PHONE_NUMBER ("phoneextensions_phoneNumber"),
+        SEXTERS_PHONE_NUMBER ("sexters_phoneNumber");
         
         private final String columnName;
         

@@ -1,13 +1,11 @@
 package com.ct.db.db.db.sexters.generated;
 
-import com.ct.db.db.db.activesessions.Activesessions;
 import com.ct.db.db.db.sexters.Sexters;
 import com.speedment.Speedment;
 import com.speedment.internal.core.code.AbstractBaseEntity;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
-import java.util.stream.Stream;
 import javax.annotation.Generated;
 
 /**
@@ -88,12 +86,6 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     }
     
     @Override
-    public Stream<Activesessions> findActivesessionsesBySextersPhoneNumber() {
-        return managerOf_(Activesessions.class)
-                .stream().filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(this.getPhoneNumber()));
-    }
-    
-    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("phoneNumber = "+Objects.toString(getPhoneNumber()));
@@ -131,10 +123,5 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     @Override
     public Class<Sexters> entityClass() {
         return Sexters.class;
-    }
-    
-    @Override
-    public Stream<Activesessions> findActivesessionses() {
-        return findActivesessionsesBySextersPhoneNumber();
     }
 }

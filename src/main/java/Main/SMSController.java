@@ -52,17 +52,24 @@ public class SMSController {
 		String to_number = request.queryParams("To");
 		String text = request.queryParams("Body");
 		System.out.println("Message received - From: " + from_number + ", To: " + to_number + ", Text: " + text);
+		
+		if (!didHandleKeywords(from_number, to_number, text)) {
+			if (!register(from_number, to_number, text)) {
+				System.out.println("User or sexter : " + from_number + " is during the registration process.");
+				return "";
+			}		
 			
-		if (!register(from_number, to_number, text)) {
-			System.out.println("User : " + from_number + " is during the registration process.");
-			return "";
-		}		
-		
-		Activesessions session = getSession(from_number, to_number);
-		if (session == null)
-			createSession(from_number);
-		
-		handleMsg(session, to_number, text);
+			Activesessions session = getSession(from_number, to_number);
+			if (session == null)
+				if (createSession(from_number)) {
+					session = getSession(from_number, to_number);
+					handleMsg(session, to_number, text);
+				}
+				else 
+					sendMsg(to_number, from_number, "We are very sorry but we couldn't connect you with the other party at this time, please try again later");
+			else 
+				handleMsg(session, to_number, text);		
+		}
 		
 		return "";
 
@@ -72,24 +79,102 @@ public class SMSController {
 		Optional<Sexters> sextersResult = sexters.stream()
 				.filter(Sexters.IS_ONLINE.equal(1))
 				.findAny();
-		return sextersResult.get().getPhoneNumber();
+		if (sextersResult.isPresent())
+			return sextersResult.get().getPhoneNumber();
+		else 
+			System.out.println("No available sexter to assign to the session");
+			return "No sexter available";
 
 	}
 
-	private static void createSession(String user_number) {
+	private static Boolean didHandleKeywords(String from_number, String to_number, String text) {
+		Optional<Sexters> sexter = sexters.stream()
+				.filter(Sexters.PHONE_NUMBER.equal(from_number))
+				.findAny();
+		
+		if (!sexter.isPresent()){ 
+			//System.out.println("Used a keyword without being a registered sexter");
+			return false;
+		}
+		
+		switch(text.toLowerCase()) {
+		   case "startsexting" :
+			   setSexterStatus(1, from_number, sexter.get().getBalance().get(), sexter.get().getRegistrationPhase().get());
+			   return true;
+		   
+		   case "stopsexting" :
+			   setSexterStatus(0, from_number, sexter.get().getBalance().get(), sexter.get().getRegistrationPhase().get());
+			   return true;
+		      
+		   case "endsession" :
+			   endSextingSession(from_number, to_number);
+			   return true;
+			  
+		   case "checkcredit" :
+			   checkSexterCredit(from_number, to_number);
+			   return true;
+			   
+		   case "helpme" :
+			   sendMsg(to_number, from_number,"Available Keywaord : StartSexting, StopSexting, EndSession, CheckCredit, HelpMe. Full details available in - to www.cybertexting.co/keywords");
+			   return true;
+			   
+		   default :
+			   return false;
+				   
+		}
+	}
+
+	private static void checkSexterCredit(String from_number, String to_number) {
+		Optional<Sexters> sextersResult = sexters.stream()
+				.filter(Sexters.PHONE_NUMBER.equal(from_number))
+				.findAny();
+		if (sextersResult.isPresent())
+			sendMsg(to_number,from_number,"Your credit is : " + sextersResult.get().getBalance().get());
+		else 
+			System.out.println("Can't check credit of a sexter that does not exit");
+	}
+
+	private static void endSextingSession(String from_number, String to_number) {
+		Optional<Activesessions> result = sessions.stream()
+				.filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(from_number))
+				.filter(Activesessions.PHONEEXTENSIONS_PHONE_NUMBER.equal(to_number))
+				.findAny();
+		if (result.isPresent())
+			result.get().remove();
+		else 
+			System.out.println("Can't end session that does not exist");
+
+	}
+
+	private static void setSexterStatus(int sexterStatus, String sexterPhoneNumber, String balance, String registrationPhase) {
+		sexters.newEmptyEntity()
+		.setPhoneNumber(sexterPhoneNumber)
+		.setIsOnline(sexterStatus)
+		.setBalance(balance)
+		.setRegistrationPhase(registrationPhase)
+		.update();
+	}
+
+	private static Boolean createSession(String user_number) {
 		String sexter = chooseSexter();
 		String extension = chooseNumber();
-		
-		sessions.newEmptyEntity()
-			.setPhoneExtensionsPhoneNumber(extension)
-			.setSextersPhoneNumber(sexter)
-			.setUsersPhoneNumber(user_number)
-			.persist();
 
+		if (sexter.contains("No") || extension.contains("No")) 
+			System.out.println("Can't create session");
+		else { 
+			sessions.newEmptyEntity()
+				.setPhoneextensionsPhoneNumber(extension)
+				.setSextersPhoneNumber(sexter)
+				.setUsersPhoneNumber(user_number)
+				.persist();
+			return true;
+		}
+		
+		return false;
 	}
 
 	private static Activesessions getSession(String from_number, String to_number) {
-		if (to_number.equals(ourUsersNumber) && (from_number.contains("5135253"))){ //Need to remove the && after testing ended
+		if (to_number.equals(ourUsersNumber) && (from_number.contains("9648"))){ //Need to remove the && after testing ended
 			Optional<Activesessions> result = sessions.stream()
 					.filter(Activesessions.USERS_PHONE_NUMBER.equal(from_number))
 					.findAny();
@@ -101,7 +186,7 @@ public class SMSController {
 		
 		Optional<Activesessions> result = sessions.stream()
 				.filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(from_number))
-				.filter(Activesessions.PHONE_EXTENSIONS_PHONE_NUMBER.equal(to_number))
+				.filter(Activesessions.PHONEEXTENSIONS_PHONE_NUMBER.equal(to_number))
 				.findAny();
 		if (!result.isPresent()) 
 			return null;
@@ -111,10 +196,10 @@ public class SMSController {
 	}
 
 	private static void handleMsg(Activesessions session, String to_number, String text) {
-		if (to_number.equals(ourUsersNumber) && (text.contains("###"))){
-			sendMsg(session.getPhoneExtensionsPhoneNumber(), session.getSextersPhoneNumber(), text);
+		if (to_number.equals(ourUsersNumber) && (text.contains("#"))){
+			sendMsg(session.getPhoneextensionsPhoneNumber(), session.getSextersPhoneNumber(), text); //To sexter
 		} else 
-			sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), text);
+			sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), text); //To user
 	}
 
 
@@ -122,7 +207,11 @@ public class SMSController {
 		Optional<Phoneextensions> result = phoneExtensions.stream()
 				.filter(Phoneextensions.IS_ACTIVE.equal(0))
 				.findAny();
-		return result.get().getPhoneNumber();
+		if (result.isPresent())
+			return result.get().getPhoneNumber();
+		else 
+			System.out.println("No available number to assign to the session");
+			return "No available number";
 
 	}
 
@@ -163,10 +252,10 @@ public class SMSController {
 			} else { //Handle the next steps of the registration
 				if (userResult.get().getRegistrationPhase().get().contains("1")) {
 					if (text.toLowerCase().contains("i agree")) {
-						//TODO - Need to update the data base to step 2
 						users.newEmptyEntity()
 						.setPhoneNumber(from_number)
-						.setRegistrationPhase("2")
+						.setCredit(100.0)
+						.setRegistrationPhase("2 - Ready to use platform")
 						.update();
 						System.out.println("User accepted the terms of usage");
 						if (isTrial) {
@@ -204,7 +293,8 @@ public class SMSController {
 					if (text.toLowerCase().contains("i agree")) {
 						sexters.newEmptyEntity()
 						.setPhoneNumber(from_number)
-						.setRegistrationPhase("2")
+						.setBalance("0")
+						.setRegistrationPhase("2 - Ready to use the platform")
 						.update();
 						System.out.println("Sexter accepted the terms of usage");
 						sendMsg(to_number, from_number,"Thank you for joining our Sexters community, please see check out our web-site for important key words (www.cybertexting.co/keywords)");

@@ -34,7 +34,7 @@ public abstract class GeneratedPhoneextensionsManagerImpl extends AbstractSqlMan
         setEntityMapper(this::newEntityFrom);
     }
     
-    protected Phoneextensions newEntityFrom(ResultSet resultSet) throws SQLException, SpeedmentException {
+    protected Phoneextensions newEntityFrom(ResultSet resultSet) throws SpeedmentException, SQLException {
         final Phoneextensions entity = newEmptyEntity();
         try {
             entity.setPhoneNumber(resultSet.getString(1));
