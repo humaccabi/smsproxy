@@ -38,6 +38,8 @@ public class SMSController {
     public static final String ACCOUNT_SID = "AC0ff7317d059cfccc68dd06ad0d14d8aa";
     public static final String AUTH_TOKEN = "c7a5192a45f3c6c14ecf80ff7dde97c0";
     public static final boolean isTrial = true;
+    public static final Double smsCost = 1.0;
+    public static final Double mmsCost = 2.0;
     final static Manager<Sexters> sexters = DBManager.Instatnce().managerOf(Sexters.class);
     final static Manager<Users> users = DBManager.Instatnce().managerOf(Users.class);
     final static Manager<Phoneextensions> phoneExtensions = DBManager.Instatnce().managerOf(Phoneextensions.class);
@@ -134,6 +136,18 @@ public class SMSController {
 			System.out.println("Can't check credit of a sexter that does not exit");
 	}
 
+	private static Double checkUserCredit(String userPhoneNumber) {
+		Optional<Users> user = users.stream()
+				.filter(Users.PHONE_NUMBER.equal(userPhoneNumber))
+				.findAny();
+		if (user.isPresent())
+			return user.get().getCredit().get();
+		else 
+			System.out.println("Can't check credit of a user that does not exit");
+		
+		return 0.0;
+	}
+	
 	private static void endSextingSession(String from_number, String to_number) {
 		Optional<Activesessions> result = sessions.stream()
 				.filter(Activesessions.SEXTERS_PHONE_NUMBER.equal(from_number))
@@ -146,7 +160,7 @@ public class SMSController {
 
 	}
 
-	private static void setSexterStatus(int sexterStatus, String sexterPhoneNumber, String balance, String registrationPhase) {
+	private static void setSexterStatus(int sexterStatus, String sexterPhoneNumber, Double balance, String registrationPhase) {
 		sexters.newEmptyEntity()
 		.setPhoneNumber(sexterPhoneNumber)
 		.setIsOnline(sexterStatus)
@@ -196,12 +210,47 @@ public class SMSController {
 	}
 
 	private static void handleMsg(Activesessions session, String to_number, String text) {
-		if (to_number.equals(ourUsersNumber) && (text.contains("#"))){
-			sendMsg(session.getPhoneextensionsPhoneNumber(), session.getSextersPhoneNumber(), text); //To sexter
+		if (to_number.equals(ourUsersNumber) && (text.contains("#"))) {
+			Double userCredits = checkUserCredit(session.getUsersPhoneNumber());
+			if ( userCredits < 11.0)
+				sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), "You credits are running low, you have " + userCredits +" make sure you get some more to continue sexting.");
+			if (credit(session.getUsersPhoneNumber(),session.getSextersPhoneNumber(),smsCost))
+				sendMsg(session.getPhoneextensionsPhoneNumber(), session.getSextersPhoneNumber(), text); //To sexter
+			else 
+				sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), "Seems like you are out of credit, in order to continue sexting please get some more credits."); 	
 		} else 
 			sendMsg(ourUsersNumber, session.getUsersPhoneNumber(), text); //To user
 	}
 
+
+	private static Boolean credit(String credit_from, String credit_to, Double amount) {
+			Optional<Sexters> sexter = sexters.stream()
+					.filter(Sexters.PHONE_NUMBER.equal(credit_to))
+					.findAny();
+			Optional<Users> user = users.stream()
+					.filter(Users.PHONE_NUMBER.equal(credit_from))
+					.findAny();
+			
+			Double userCurrentCredit = user.get().getCredit().get();
+			if (userCurrentCredit < amount)
+				return false;
+			
+			users.newEmptyEntity()
+				.setPhoneNumber(credit_from)
+				.setCredit(userCurrentCredit - amount)
+				.setRegistrationPhase("2 - Ready to use platform")
+				.update();
+			
+			Double sexterCurrentBalance = sexter.get().getBalance().get();
+			sexters.newEmptyEntity()
+				.setPhoneNumber(credit_to)
+				.setBalance(sexterCurrentBalance + amount)
+				.setRegistrationPhase("2 - Ready to use the platform")
+				.update();
+			
+			return true;
+ 
+	}
 
 	private static String chooseNumber() {
 		Optional<Phoneextensions> result = phoneExtensions.stream()
@@ -284,7 +333,7 @@ public class SMSController {
 				sexters.newEmptyEntity()
 					.setPhoneNumber(from_number)
 					.setRegistrationPhase("1 - Waiting for terms approval")
-					.setBalance("0")
+					.setBalance(0.0)
 					.setIsOnline(0)
 					.persist();
 				return false;
@@ -293,7 +342,7 @@ public class SMSController {
 					if (text.toLowerCase().contains("i agree")) {
 						sexters.newEmptyEntity()
 						.setPhoneNumber(from_number)
-						.setBalance("0")
+						.setBalance(0.0)
 						.setRegistrationPhase("2 - Ready to use the platform")
 						.update();
 						System.out.println("Sexter accepted the terms of usage");

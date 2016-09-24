@@ -34,7 +34,7 @@ public abstract class GeneratedUsersManagerImpl extends AbstractSqlManager<Users
         setEntityMapper(this::newEntityFrom);
     }
     
-    protected Users newEntityFrom(ResultSet resultSet) throws SpeedmentException, SQLException {
+    protected Users newEntityFrom(ResultSet resultSet) throws SQLException, SpeedmentException {
         final Users entity = newEmptyEntity();
         try {
             entity.setPhoneNumber(resultSet.getString(1));

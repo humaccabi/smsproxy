@@ -34,11 +34,11 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
         setEntityMapper(this::newEntityFrom);
     }
     
-    protected Sexters newEntityFrom(ResultSet resultSet) throws SpeedmentException, SQLException {
+    protected Sexters newEntityFrom(ResultSet resultSet) throws SQLException, SpeedmentException {
         final Sexters entity = newEmptyEntity();
         try {
             entity.setPhoneNumber(resultSet.getString(1));
-            entity.setBalance(resultSet.getString(2));
+            entity.setBalance(getDouble(resultSet, 2));
             entity.setTimestamp(resultSet.getString(3));
             entity.setIsOnline(getInt(resultSet, 4));
             entity.setRegistrationPhase(resultSet.getString(5));
@@ -75,7 +75,7 @@ public abstract class GeneratedSextersManagerImpl extends AbstractSqlManager<Sex
     public void set(Sexters entity, FieldIdentifier<Sexters> identifier, Object value) {
         switch ((Sexters.Identifier) identifier) {
             case PHONE_NUMBER : entity.setPhoneNumber((String) value); break;
-            case BALANCE : entity.setBalance((String) value); break;
+            case BALANCE : entity.setBalance((Double) value); break;
             case TIMESTAMP : entity.setTimestamp((String) value); break;
             case IS_ONLINE : entity.setIsOnline((Integer) value); break;
             case REGISTRATION_PHASE : entity.setRegistrationPhase((String) value); break;

@@ -2,6 +2,7 @@ package com.ct.db.db.db.sexters.generated;
 
 import com.ct.db.db.db.sexters.Sexters;
 import com.speedment.Entity;
+import com.speedment.config.db.mapper.identity.DoubleIdentityMapper;
 import com.speedment.config.db.mapper.identity.IntegerIdentityMapper;
 import com.speedment.config.db.mapper.identity.StringIdentityMapper;
 import com.speedment.field.ComparableField;
@@ -33,7 +34,7 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * This Field corresponds to the {@link Sexters} field that can be obtained
      * using the {@link Sexters#getBalance()} method.
      */
-    final StringField<Sexters, String> BALANCE = new StringFieldImpl<>(Identifier.BALANCE, o -> o.getBalance().orElse(null), Sexters::setBalance, new StringIdentityMapper(), false);
+    final ComparableField<Sexters, Double, Double> BALANCE = new ComparableFieldImpl<>(Identifier.BALANCE, o -> o.getBalance().orElse(null), Sexters::setBalance, new DoubleIdentityMapper(), false);
     /**
      * This Field corresponds to the {@link Sexters} field that can be obtained
      * using the {@link Sexters#getTimestamp()} method.
@@ -64,7 +65,7 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * 
      * @return the balance of this Sexters
      */
-    Optional<String> getBalance();
+    Optional<Double> getBalance();
     
     /**
      * Returns the timestamp of this Sexters. The timestamp field corresponds to
@@ -106,7 +107,7 @@ public interface GeneratedSexters extends Entity<Sexters> {
      * @param balance to set of this Sexters
      * @return this Sexters instance
      */
-    Sexters setBalance(String balance);
+    Sexters setBalance(Double balance);
     
     /**
      * Sets the timestamp of this Sexters. The timestamp field corresponds to the

@@ -34,7 +34,7 @@ public abstract class GeneratedActivesessionsManagerImpl extends AbstractSqlMana
         setEntityMapper(this::newEntityFrom);
     }
     
-    protected Activesessions newEntityFrom(ResultSet resultSet) throws SpeedmentException, SQLException {
+    protected Activesessions newEntityFrom(ResultSet resultSet) throws SQLException, SpeedmentException {
         final Activesessions entity = newEmptyEntity();
         try {
             entity.setId(resultSet.getInt(1));

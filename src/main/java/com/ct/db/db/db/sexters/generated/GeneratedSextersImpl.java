@@ -21,7 +21,7 @@ import javax.annotation.Generated;
 public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> implements Sexters {
     
     private String phoneNumber;
-    private String balance;
+    private Double balance;
     private String timestamp;
     private Integer isOnline;
     private String registrationPhase;
@@ -36,7 +36,7 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     }
     
     @Override
-    public Optional<String> getBalance() {
+    public Optional<Double> getBalance() {
         return Optional.ofNullable(balance);
     }
     
@@ -62,7 +62,7 @@ public abstract class GeneratedSextersImpl extends AbstractBaseEntity<Sexters> i
     }
     
     @Override
-    public final Sexters setBalance(String balance) {
+    public final Sexters setBalance(Double balance) {
         this.balance = balance;
         return this;
     }
